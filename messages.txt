@@ -18,3 +18,8 @@ user_email: g@m.ru
 user_enquiry: here Geek
 contact_submitted: submit
 --------------------
+user_name: feke
+user_email: f@f.ru
+user_enquiry: I am Fek!
+contact_submitted: submit
+--------------------

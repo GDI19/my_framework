@@ -15,5 +15,9 @@ fronts = [date_req, key_req]
 # Page controller
 routes = {
     '/': Index(),
+    '/index/': Index(),
     '/contact/': Contact(),
+    '/page/': Page(),
+    '/another_page/': AnotherPage(),
+    '/examples/': Examples()
 }

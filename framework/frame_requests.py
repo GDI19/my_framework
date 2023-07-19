@@ -38,9 +38,9 @@ class GetRequests:
         query_string = self.environ['QUERY_STRING']
         if query_string:
             # print('query_string', query_string)
-            params = ParseSaveInputData.parsing(query_string)
+            params = ParseSaveInputData().parsing(query_string)
             # print('get params', params)
-            checked_params = ParseSaveInputData.decode_value(params)
+            checked_params = ParseSaveInputData().decode_value(params)
             return checked_params
 
 
@@ -58,8 +58,8 @@ class PostRequests:
             # print('str data:', data)
             params = ParseSaveInputData.parsing(data)
             # print('post params', params)
-            checked_params = ParseSaveInputData.decode_value(params)
-            ParseSaveInputData.write_contact_msg_file(checked_params)
+            checked_params = ParseSaveInputData().decode_value(params)
+            ParseSaveInputData().write_contact_msg_file(checked_params)
             return  checked_params
         return b''
 
