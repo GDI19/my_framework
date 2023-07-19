@@ -1,4 +1,4 @@
-
+from framework.frame_requests import GetRequests, PostRequests
 
 class PageNotFound404:
     def __call__(self, request):
@@ -26,6 +26,19 @@ class Framework:
         if not path.endswith('/'):
             path = f'{path}/'
 
+        method = environ['REQUEST_METHOD']
+        request['method'] = method
+        print('method:', method)
+
+        if method == 'GET':
+            get_data = GetRequests(environ).__call__()
+            if get_data:
+                print(f'Нам пришёл GET-запрос: {get_data}')
+        elif method == 'POST':
+            post_data = PostRequests(environ).__call__()
+            print(f'Нам пришёл POST-запрос: {post_data}')
+
+
         # page controller
         if path in self.routes:
             view = self.routes[path]
@@ -35,8 +48,9 @@ class Framework:
         # Front controller
         for item in self.fronts:
             item(request)
-        print('Application request:', request)
+        # print('Application request:', request)
 
         code, body = view(request)
         start_response(code, [('Content-Type', 'text/html')])
         return [body.encode('utf-8')]
+
