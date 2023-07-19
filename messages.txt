@@ -3,3 +3,18 @@ user_email: d2@d.com
 user_enquiry: hello!
 contact_submitted: submit
 --------------------
+user_name: new
+user_email: my@my.com
+user_enquiry: here i am
+contact_submitted: submit
+--------------------
+user_name: Pet
+user_email: pet@h.ru
+user_enquiry: Here is Pet!
+contact_submitted: submit
+--------------------
+user_name: geek
+user_email: g@m.ru
+user_enquiry: here Geek
+contact_submitted: submit
+--------------------

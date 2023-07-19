@@ -24,10 +24,10 @@ class ParseSaveInputData:
 
     @staticmethod
     def write_contact_msg_file(data):
-        with open('messages.txt', 'w', encoding='utf-8') as f:
+        with open('messages.txt', 'a', encoding='utf-8') as f:
             for k, v in data.items():
                 f.write(f'{k}: {v}\n')
-            f.write('-' * 20)
+            f.write(('-' * 20) + '\n')
 
 
 class GetRequests:
