@@ -1,5 +1,6 @@
 from framework.frame_requests import GetRequests, PostRequests
 
+
 class PageNotFound404:
     def __call__(self, request):
         return '404 Upps', '404 Not Found!'
@@ -33,10 +34,10 @@ class Framework:
         if method == 'GET':
             get_data = GetRequests(environ).__call__()
             if get_data:
-                print(f'Нам пришёл GET-запрос: {get_data}')
+                print(f'пришёл GET-запрос: {get_data}')
         elif method == 'POST':
             post_data = PostRequests(environ).__call__()
-            print(f'Нам пришёл POST-запрос: {post_data}')
+            print(f'пришёл POST-запрос: {post_data}')
 
 
         # page controller
