@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block menu %}
+        {% include 'in_menu.html' %}
+{% endblock %}
+
+{% block content %}
+      <div id="content">
+          <h1>Список категорий</h1>
+          {% if objects_list %}
+            <ul>
+                {% for item in objects_list %}
+                <li>
+                    {{item.name}} <span>Количество курсов: {{item.course_count()}}</span>
+                </li>
+                {% endfor %}
+            </ul>
+            <div>
+                <li><a href="/create_course/">Создать курс</a></li>
+            </div>
+          {% else %}
+            <h2>No categories have been added yet</h2>
+          {% endif %}
+
+      </div>
+{% endblock %}
+

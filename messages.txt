@@ -43,3 +43,25 @@ user_email: dim@m.ru
 user_enquiry: Привет снова!!!
 contact_submitted: submit
 --------------------
+name: di
+email: d@m.ru
+location: msk
+--------------------
+name: di
+email: d@m.ru
+location: msk
+--------------------
+name: Paris
+--------------------
+name: Paris
+--------------------
+name: Paris
+--------------------
+name: Paris
+--------------------
+name: Paris
+--------------------
+name: Paris
+--------------------
+name: Honolulu
+--------------------

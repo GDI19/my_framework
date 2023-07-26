@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Создание курса</title>
+{% endblock %}
+
+{% block menu %}
+        {% include 'in_menu.html' %}
+{% endblock %}
+
+{% block content %}
+      <div id="content">
+        <h1>Создание категории</h1>
+        <form method="post">
+            <input type="text" name="name" placeholder="Название">
+            <button type="submit">Сохранить и вернуться на главную</button>
+        </form>
+      </div>
+{% endblock %}
+

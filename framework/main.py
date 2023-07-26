@@ -33,10 +33,12 @@ class Framework:
 
         if method == 'GET':
             get_data = GetRequests(environ).__call__()
+            request['data'] = get_data
             if get_data:
                 print(f'пришёл GET-запрос: {get_data}')
         elif method == 'POST':
             post_data = PostRequests(environ).__call__()
+            request['data'] = post_data
             print(f'пришёл POST-запрос: {post_data}')
 
 

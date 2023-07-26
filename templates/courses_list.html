@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{title}}</title>
+{% endblock %}
+
+{% block menu %}
+        {% include 'in_menu.html' %}
+{% endblock %}
+
+{% block content %}
+      <div id="content">
+            <a href="/create_course/?id={{id}}">Создать новый курс</a>
+            <br>
+          {% if objects_list %}
+            <h1>Список курсов для категории "{{name}}"</h1>
+            {% for item in objects_list %}
+                <li>
+                    {{item.name}} <span><a href="/copy_course/?name={{item.name}}">скопировать</a></span>
+                </li>
+            {% endfor %}
+          {% else%}
+            <h1>Список курсов</h1>
+            <h2>{{err_message}}</h2>
+          {% endif %}
+      </div>
+{% endblock %}
+

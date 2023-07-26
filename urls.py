@@ -17,7 +17,13 @@ routes = {
     '/': Index(),
     '/index/': Index(),
     '/contact/': Contact(),
-    '/page/': Page(),
-    '/another_page/': AnotherPage(),
-    '/examples/': Examples()
+    '/study_programs/': StudyPrograms(),
+    '/courses_list/': CourseList(),
+    '/create_course/': CreateCourse(),
+    '/create_category/': CreateCategory(),
+    '/category_list/': CategoryList(),
+    '/copy_course/': CopyCourse()
+    # '/page/': Page(),
+    # '/another_page/': AnotherPage(),
+    # '/examples/': Examples()
 }

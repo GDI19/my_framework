@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>{{ title }}</title>
+{% endblock %}
+
+{% block menu %}
+        {% include 'in_menu.html' %}
+{% endblock %}
+
+{% block content %}
+      <div id="content">
+          {% if name %}
+            <h1>Создание курса для категории "{{name}}"</h1>
+            <form method="post">
+                <input type="text" name="name" placeholder="Название">
+                <button type="submit">Сохранить и вернуться к списку курсов</button>
+            </form>
+          {% else%}
+            <h1>Список курсов</h1>
+            <h2>{{err_message}}</h2>
+          {% endif %}
+      </div>
+{% endblock %}
+
