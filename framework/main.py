@@ -1,10 +1,5 @@
 from framework.frame_requests import GetRequests, PostRequests
-
-
-class PageNotFound404:
-    def __call__(self, request):
-        return '404 Upps', '404 Not Found!'
-
+from views import PageNotFound404
 
 class Framework:
     """Bypass our routes. Get html body in bytes with

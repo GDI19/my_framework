@@ -65,3 +65,12 @@ name: Paris
 --------------------
 name: Honolulu
 --------------------
+name: Paris
+--------------------
+name: new york
+--------------------
+user_name: geek
+user_email: g@m.ru
+user_enquiry: привет!
+contact_submitted: submit
+--------------------

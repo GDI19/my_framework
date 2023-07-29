@@ -13,17 +13,14 @@ fronts = [date_req, key_req]
 
 
 # Page controller
-routes = {
-    '/': Index(),
-    '/index/': Index(),
-    '/contact/': Contact(),
-    '/study_programs/': StudyPrograms(),
-    '/courses_list/': CourseList(),
-    '/create_course/': CreateCourse(),
-    '/create_category/': CreateCategory(),
-    '/category_list/': CategoryList(),
-    '/copy_course/': CopyCourse()
-    # '/page/': Page(),
-    # '/another_page/': AnotherPage(),
-    # '/examples/': Examples()
-}
+# routes = {
+#     '/': Index(),
+#     '/index/': Index(),
+#     '/contact/': Contact(),
+#     '/study_programs/': StudyPrograms(),
+#     '/courses_list/': CourseList(),
+#     '/create_course/': CreateCourse(),
+#     '/create_category/': CreateCategory(),
+#     '/category_list/': CategoryList(),
+#     '/copy_course/': CopyCourse()
+# }

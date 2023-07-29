@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+  {% block title %}
+    <title>{{ title }}</title>
+  {% endblock %}
+
+{% block menu %}
+        {% include 'in_menu.html' %}
+{% endblock %}
+
+{% block content %}
+<div id="content">
+    <h1>status 404</h1>
+    <h2>Sorry this page is not found</h2>
+</div>
+{% endblock %}

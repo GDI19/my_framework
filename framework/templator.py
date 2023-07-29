@@ -6,6 +6,7 @@ from jinja2.environment import Environment
 
 TEMPLATE_FOLDER = 'templates'
 
+
 def render(template_name, **kwargs):
     """
     Минимальный пример работы с шаблонизатором
@@ -27,9 +28,3 @@ def render(template_name, **kwargs):
     template = env.get_template(template_name)
     # рендерим шаблон с параметрами
     return template.render(**kwargs)
-
-if __name__ == '__main__':
-    # Пример использования
-    # TEMPLATE_FOLDER = ''
-    output_test = render('test_template.html', object_list=[{'name': 'Leo'}, {'name': 'Kate'}])
-    print(output_test)
