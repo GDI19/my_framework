@@ -1,6 +1,6 @@
 from quopri import decodestring
 from my_patterns.course_pattern import CourseFactory, Category
-from my_patterns.user_pattern import UserFactory
+from my_patterns.user_pattern import UserFactory, Student
 
 
 class Engine:
@@ -11,8 +11,8 @@ class Engine:
         self.categories = []
 
     @staticmethod
-    def create_user(type_):
-        return UserFactory.create(type_)
+    def create_user(type_, name):
+        return UserFactory.create(type_, name)
 
     @staticmethod
     def create_category(name, category=None):
@@ -34,6 +34,11 @@ class Engine:
             if item.name == name:
                 return item
         return None
+
+    def get_student(self, name) -> Student:
+        for item in self.students:
+            if item.name == name:
+                return item
 
     @staticmethod
     def decode_value(val):

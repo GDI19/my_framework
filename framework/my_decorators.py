@@ -1,3 +1,6 @@
+# структурный паттерн - Декоратор
+
+
 from datetime import datetime
 from functools import update_wrapper
 from time import time

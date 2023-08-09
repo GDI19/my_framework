@@ -3,6 +3,7 @@ from framework.main import Framework
 from urls import fronts
 from views import routes_dict
 
+
 application = Framework(routes_dict, fronts)
 
 

@@ -1,15 +1,15 @@
-
-
+# абстрактный пользователь
 class User:
-    pass
-
+    def __init__(self, name):
+        self.name = name
 
 class Teacher(User):
     pass
 
 class Student(User):
-    pass
-
+    def __init__(self, name):
+        self.courses = []
+        super().__init__(name)
 
 # порождающий паттерн Фабричный метод
 class UserFactory:
@@ -18,5 +18,5 @@ class UserFactory:
         'teacher': Teacher
     }
     @classmethod
-    def create(cls, type_):
-        return cls.types[type_]()
+    def create(cls, type_, name):
+        return cls.types[type_](name)

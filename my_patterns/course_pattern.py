@@ -1,4 +1,6 @@
 from copy import deepcopy
+from my_patterns.behavior_patterns import Subject
+from my_patterns.user_pattern import Student
 
 
 # порождающий паттерн Прототип
@@ -7,18 +9,27 @@ class CoursePrototype:
         return deepcopy(self)
 
 
-class Course(CoursePrototype):
+class Course(CoursePrototype, Subject):
     def __init__(self, name, category):
         self.name = name
         self.category = category
         self.category.courses.append(self)
+        self.students = []
+        super().__init__()
 
+    def __getitem__(self, item):
+        return self.students[item]
+
+    def add_student(self, student: Student):
+        self.students.append(student)
+        student.courses.append(self)
+        self.notify()
 
 # интерактивный курс
 class InteractiveCourse(Course):
     pass
 
-
+#
 # курс в записи
 class RecordCourse(Course):
     pass
