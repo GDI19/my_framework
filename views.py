@@ -1,7 +1,7 @@
 from datetime import date
 
 from framework.templator import render
-from my_patterns.behavior_patterns import CreateView, ListView
+from my_patterns.behavior_patterns import CreateView, ListView, EmailNotifier, SmsNotifier
 from my_patterns.log_pattern import Logger
 from my_patterns.main_interface import Engine
 from framework.my_decorators import AppRoutes, Debug
@@ -10,6 +10,8 @@ from framework.my_decorators import AppRoutes, Debug
 
 site = Engine()
 logger = Logger('main')
+email_notifier = EmailNotifier()
+sms_notifier = SmsNotifier()
 
 
 routes_dict = {}
@@ -19,13 +21,13 @@ routes_dict = {}
 class Index:
     @Debug(name='Index')
     def __call__(self, request):
-        return '200 OK', render('index.html', date=request.get('date', None), title='Home')
+        return '200 OK', render('index.html', objects_list=site.categories, title='Home')
 
 
 @AppRoutes(routes=routes_dict, url='/index/')
 class Index:
     def __call__(self, request):
-        return '200 OK', render('index.html', date=request.get('date', None), title='Home')
+        return '200 OK', render('index.html', objects_list=site.categories, title='Home')
 
 
 @AppRoutes(routes=routes_dict, url='/contact/')
@@ -66,9 +68,7 @@ class CreateCourse:
 
     def __call__(self, request):
         if request['method'] == 'POST':
-            # метод пост
             data = request['data']
-
             name = data['name']
             name = site.decode_value(name)
 
@@ -77,6 +77,8 @@ class CreateCourse:
                 category = site.find_category_by_id(int(self.category_id))
 
                 course = site.create_course('record', name, category)
+                course.observers.append(email_notifier)
+                course.observers.append(sms_notifier)
                 site.courses.append(course)
 
             return '200 OK', render('courses_list.html',
@@ -196,3 +198,12 @@ class PageNotFound404:
     @Debug(name='PageNotFound404')
     def __call__(self, request):
         return '404 Upps', render('not_found404.html')
+
+
+
+# @AppRoutes(routes=routes_dict, url='/api/')
+# class CourseApi:
+#     @Debug(name='CourseApi')
+#     def __call__(self, request):
+#         return '200 OK', BaseSerializer(site.courses).save()
+

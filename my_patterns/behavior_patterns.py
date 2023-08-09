@@ -101,3 +101,15 @@ class FileWriter:
         with open(self.file_name, 'a', encoding='utf-8') as f:
             f.write(f'{text}\n')
 
+
+# class BaseSerializer:
+#
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     def save(self):
+#         return dumps(self.obj)
+#
+#     @staticmethod
+#     def load(data):
+#         return loads(data)

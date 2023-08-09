@@ -74,3 +74,19 @@ user_email: g@m.ru
 user_enquiry: привет!
 contact_submitted: submit
 --------------------
+name: dmitry
+--------------------
+name: python
+--------------------
+name: Java
+--------------------
+name: Java
+--------------------
+name: Java
+--------------------
+name: php
+--------------------
+name: JavaScript
+--------------------
+name: python
+--------------------
