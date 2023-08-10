@@ -1,3 +1,6 @@
+from my_patterns.unit_of_work import DomainObject
+
+
 # абстрактный пользователь
 class User:
     def __init__(self, name):
@@ -6,7 +9,7 @@ class User:
 class Teacher(User):
     pass
 
-class Student(User):
+class Student(User, DomainObject):
     def __init__(self, name):
         self.courses = []
         super().__init__(name)

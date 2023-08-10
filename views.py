@@ -4,7 +4,10 @@ from framework.templator import render
 from my_patterns.behavior_patterns import CreateView, ListView, EmailNotifier, SmsNotifier
 from my_patterns.log_pattern import Logger
 from my_patterns.main_interface import Engine
+from my_patterns.unit_of_work import UnitOfWork
+from my_patterns.data_mappers import MapperRegistry
 from framework.my_decorators import AppRoutes, Debug
+
 
 
 
@@ -13,6 +16,8 @@ logger = Logger('main')
 email_notifier = EmailNotifier()
 sms_notifier = SmsNotifier()
 
+UnitOfWork.new_current()
+UnitOfWork.get_current().set_mapper_registry(MapperRegistry)
 
 routes_dict = {}
 
@@ -158,8 +163,12 @@ class CopyCourse:
 
 @AppRoutes(routes=routes_dict, url='/student-list/')
 class StudentListView(ListView):
-    queryset = site.students
+    # queryset = site.students
     template_name = 'student_list.html'
+
+    def get_queryset(self):
+        mapper = MapperRegistry.get_current_mapper('student')
+        return mapper.all()
 
 
 @AppRoutes(routes=routes_dict, url='/create-student/')
@@ -171,6 +180,8 @@ class StudentCreateView(CreateView):
         name = site.decode_value(name)
         new_obj = site.create_user('student', name)
         site.students.append(new_obj)
+        new_obj.mark_new()
+        UnitOfWork.get_current().commit()
 
 
 @AppRoutes(routes=routes_dict, url='/add-student/')
