@@ -16,7 +16,7 @@ class Engine:
 
     @staticmethod
     def create_category(name, category=None):
-        return Category(name, category)
+        return Category(name)
 
     @staticmethod
     def create_course(type_, name, category):

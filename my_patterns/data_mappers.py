@@ -2,16 +2,44 @@ from sqlite3 import connect
 
 from my_patterns.db_exeptions import *
 from my_patterns.user_pattern import Student
+from my_patterns.course_pattern import Category, Course
 
 connection = connect('patterns.sqlite')
 
 
-class StudentMapper:
+class BaseFrameMapper:
 
-    def __init__(self, connection):
+    def __init__(self, connection, tablename):
         self.connection = connection
         self.cursor = connection.cursor()
-        self.tablename = 'student'
+        self.tablename = tablename
+
+    def all(self):
+        result = []
+        return result
+
+    def find_by_id(self, id):
+        pass
+
+    def insert(self, obj):
+        pass
+
+    def update(self, obj):
+        pass
+
+    def delete(self, obj):
+        statement = f"DELETE FROM {self.tablename} WHERE id=?"
+        self.cursor.execute(statement, (obj.id,))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise DbDeleteException(e.args)
+
+
+class StudentMapper(BaseFrameMapper):
+
+    def __init__(self, connection, tablename):
+        super().__init__(connection, tablename)
 
     def all(self):
         statement = f'SELECT * from {self.tablename}'
@@ -50,27 +78,65 @@ class StudentMapper:
         except Exception as e:
             raise DbUpdateException(e.args)
 
-    def delete(self, obj):
-        statement = f"DELETE FROM {self.tablename} WHERE id=?"
-        self.cursor.execute(statement, (obj.id,))
+
+class CategoryMapper(BaseFrameMapper):
+
+    def __init__(self, connection, tablename):
+        super().__init__(connection, tablename)
+
+    def all(self):
+        statement = f'SELECT * from {self.tablename}'
+        self.cursor.execute(statement)
+        result = []
+        for item in self.cursor.fetchall():
+            id, name = item
+            category = Category(name)
+            category.id = id
+            result.append(category)
+        return result
+
+    def find_by_id(self, id):
+        statement = f"SELECT id, name FROM {self.tablename} WHERE id=?"
+        self.cursor.execute(statement, (id,))
+        result = self.cursor.fetchone()
+        if result:
+            return Category(*result)
+        else:
+            raise RecordNotFoundException(f'record with id={id} not found')
+
+    def insert(self, obj):
+        statement = f"INSERT INTO {self.tablename} (name) VALUES (?)"
+        self.cursor.execute(statement, (obj.name,))
         try:
             self.connection.commit()
         except Exception as e:
-            raise DbDeleteException(e.args)
+            raise DbCommitException(e.args)
+
+    def update(self, obj):
+        statement = f"UPDATE {self.tablename} SET name=? WHERE id=?"
+
+        self.cursor.execute(statement, (obj.name, obj.id))
+        try:
+            self.connection.commit()
+        except Exception as e:
+            raise DbUpdateException(e.args)
+
 
 
 # архитектурный системный паттерн - Data Mapper
 class MapperRegistry:
     mappers = {
         'student': StudentMapper,
-        # 'category': CategoryMapper
+        'category': CategoryMapper
     }
 
     @staticmethod
     def get_mapper(obj):
         if isinstance(obj, Student):
-            return StudentMapper(connection)
+            return StudentMapper(connection, 'student')
+        elif isinstance(obj, Category):
+            return StudentMapper(connection, 'category')
 
     @staticmethod
     def get_current_mapper(name):
-        return MapperRegistry.mappers[name](connection)
+        return MapperRegistry.mappers[name](connection, name)

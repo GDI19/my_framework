@@ -114,15 +114,17 @@ class CreateCategory:
             name = data['name']
             name = site.decode_value(name)
 
-            category_id = data.get('category_id')
+            # category_id = data.get('category_id')
+            #
+            # category = None
+            # if category_id:
+            #     category = site.find_category_by_id(int(category_id))
 
-            category = None
-            if category_id:
-                category = site.find_category_by_id(int(category_id))
-
-            new_category = site.create_category(name, category)
+            new_category = site.create_category(name)
 
             site.categories.append(new_category)
+            new_category.mark_new()
+            UnitOfWork.get_current().commit()
 
             return '200 OK', render('index.html', title='Home', objects_list=site.categories)
         else:
