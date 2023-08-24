@@ -106,3 +106,8 @@ name: dmitry
 --------------------
 name: python
 --------------------
+user_name: DI
+user_email: l
+user_enquiry: привет!
+contact_submitted: submit
+--------------------
